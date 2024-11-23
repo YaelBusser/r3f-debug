@@ -1,40 +1,9 @@
 import './App.css'
 import {Canvas} from "@react-three/fiber";
-import {Grid, OrbitControls, useHelper} from "@react-three/drei";
-import React, {useRef} from "react";
-import * as THREE from "three";
-import {useControls} from "leva";
+import {Grid, OrbitControls} from "@react-three/drei";
+import Box from "./components/Box";
+import {DoubleSide} from "three";
 
-// useHelper pour voir un objet invisible
-const Box = () =>{
-    const boxRef = useRef<any>(null);
-    useHelper(boxRef, THREE.BoxHelper, "red");
-
-    const {position} = useControls({
-        position: {
-            x: 0,
-            y: 0,
-            z: 0
-        }
-    })
-    return (
-        <mesh ref={boxRef}>
-            <boxGeometry position={[position.x, position.y, position.z]}/>
-            <meshBasicMaterial transparent color={"white"} opacity={0} />
-            <Grid
-                sectionSize={1}
-                sectionColor={"black"}
-                sectionThickness={1}
-                cellSize={0.5}
-                cellColor={"black"}
-                cellThickness={0.8}
-                infiniteGrid
-                fadeDistance={50}
-                fadeStrength={10}
-            />
-        </mesh>
-    );
-}
 
 function App() {
     return (
@@ -63,6 +32,18 @@ function App() {
                  */
             }
             <Box/>
+            <Grid
+                sectionSize={1}
+                sectionColor={"black"}
+                sectionThickness={1}
+                cellSize={0.5}
+                cellColor={"black"}
+                cellThickness={0.8}
+                infiniteGrid
+                fadeDistance={50}
+                fadeStrength={10}
+                side={DoubleSide}
+            />
         </Canvas>
     )
 }
